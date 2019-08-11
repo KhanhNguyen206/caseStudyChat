@@ -1,0 +1,88 @@
+<!--<div class="container-fluid">-->
+<!--  <div class="chat-group row">-->
+<!--    <div class="col-md-2 side-bar">-->
+<!--      <h3>Chat group</h3>-->
+<!--      <ul *ngFor="let user of users">-->
+<!--        <li style="color: greenyellow; font-size: large;" (click)="changeUser()">-->
+<!--          {{user.userName}}-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <div class="col-md-10 p-0">-->
+<!--      <div class="window">-->
+<!--        <div class="window-chat" *ngFor="let msg of messages">-->
+<!--          <div class="alert alert-success ">{{msg.content}}</div>-->
+<!--          <img [src]="msg.userSend.avatar">-->
+<!--        </div>-->
+<!--        <div class="enter">-->
+<!--          <form class="" (ngSubmit)="addMessage()" [formGroup]="messageForm">-->
+<!--            <div class="row">-->
+<!--              <input type="text" formControlName="message" class="input-message col-md-9" [(ngModel)]="content"-->
+<!--                     placeholder="Enter your message">-->
+<!--              <button type="submit" class="col-md-1 button-send">Send</button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container-fluid">
+  <div class="main">
+    <div class="side-bar" style="color: white; align-content: center">
+      <div style="height: 15%">
+        <h3><i class="fas fa-comments"></i> Chat group </h3>
+      </div>
+      <div class="row" style="padding-left: 25px; margin-bottom: 20px">
+        <h4>Direct Messages</h4>
+        <i class="fas fa-sms"></i>
+      </div>
+      <div style="padding-left: 50px; margin-bottom: 10px" *ngFor="let user of users">
+        <div class="row">
+          <img [src]="user.avatar" height="55" width="55">
+          <button type="button" (click)="changeUser(user)" class="btn btn-secondary">{{user.userName}}</button>
+        </div>
+        <div>
+          <small id="emailHelp" class="form-text text-muted">{{user.status}}</small>
+        </div>
+      </div>
+      <div class="status">
+        <form [formGroup]="statusForm" (ngSubmit)="changeStatus()">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Status</span>
+            </div>
+            <textarea class="form-control" placeholder="Enter your status"
+                      formControlName="status" [(ngModel)]="contentStatus"></textarea>
+            <button type="submit" class="btn btn-secondary">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="window-chat">
+      <div class="top-bar">
+        <button type="button" class="btn btn-secondary"><i class="fas fa-comment-dots"></i></button>
+        <button type="button" class="btn btn-secondary"><i class="fas fa-phone"></i></button>
+        <button type="button" class="btn btn-secondary"><i class="fas fa-video"></i></button>
+      </div>
+      <div class="allMess row" *ngFor="let msg of messages">
+        <div><img [src]="msg.userSend.avatar" height="55" width="55"/></div>
+        <div class="mess" style="position: relative; left: 0px">{{msg.content}}</div>
+      </div>
+      <div class="typing">
+        <form (ngSubmit)="addMessage()" [formGroup]="messageForm">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="far fa-images"></i></span>
+            </div>
+            <input type="text" class="form-control"
+                   formControlName="message" [(ngModel)]="content"
+                   placeholder="Enter your message" aria-label="Username" aria-describedby="basic-addon1">
+            <button type="submit" class="btn btn-dark">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
